@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIDUL'S PRESENT</title>
+<style>
+  /* ===== COLORS ===== */
+  :root {
+    --accent: #4FC3F7;
+    --glass-opacity: 0.18;
+    --light-text:#222;
+    --dark-text:#f5f5f5;
+  }
+
+  body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:
+      radial-gradient(circle at top left, rgba(79,195,247,0.35), transparent 40%),
+      radial-gradient(circle at bottom right, rgba(0,0,0,0.15), transparent 40%),
+      linear-gradient(135deg,#f8fbff,#eef6ff);
+    color:var(--light-text);
+    scroll-behavior:smooth;
+    transition:0.4s;
+  }
+
+  body.dark{
+    background:
+      radial-gradient(circle at top left, rgba(79,195,247,0.25), transparent 45%),
+      radial-gradient(circle at bottom right, rgba(0,0,0,0.6), transparent 50%),
+      linear-gradient(135deg,#020617,#040d1f,#020617);
+    color:var(--dark-text);
+  }
+
+  /* ===== TOPBAR ===== */
+  .topbar{
+    position:fixed; top:0; left:0; right:0;
+    height:60px; display:flex; justify-content:space-between; align-items:center;
+    padding:0 20px;
+    background:rgba(255,255,255,0.25);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+  }
+  body.dark .topbar{
+    background:rgba(18,18,18,0.4);
+  }
+  .logo-circle{
+    width:50px; height:50px;
+    border-radius:50%;
+    overflow:hidden;
+    cursor:pointer;
+  }
+  .logo-circle img{
+    width:100%; height:100%; object-fit:cover;
+  }
+  .menu-toggle, .theme-toggle{
+    font-size:24px; cursor:pointer; margin-left:15px;
+  }
+
+  /* ===== SLIDE MENU ===== */
+  .menu{
+    position:fixed; top:0; right:-260px; width:260px; height:100vh;
+    padding:80px 20px 20px;
+    background:rgba(255,255,255,0.25);
+    backdrop-filter:blur(12px);
+    transition:0.3s;
+    z-index:999;
+  }
+  body.dark .menu{
+    background:rgba(18,18,18,0.6);
+  }
+  .menu.show{right:0;}
+  .menu ul{list-style:none;padding:0;margin:0;}
+  .menu ul li{margin:20px 0;font-size:18px;cursor:pointer;color:var(--accent);}
+
+  /* ===== GLASS BOX ===== */
+  .glass-card, .glass-box{
+    background:rgba(255,255,255,var(--glass-opacity));
+    backdrop-filter:blur(22px) saturate(160%);
+    -webkit-backdrop-filter:blur(22px) saturate(160%);
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.2);
+    transition:0.3s;
+    text-align:center;
+  }
+  body.dark .glass-card, body.dark .glass-box{
+    background:rgba(18,18,18,0.3);
+  }
+  .glass-card img{width:120px;height:120px;border-radius:50%;object-fit:cover;margin-bottom:15px;border:3px solid var(--accent);}
+  .glass-card h1{margin:0;color:var(--accent);}
+  .glass-card h3{margin:5px 0;font-weight:normal;}
+
+  /* ===== SECTIONS ===== */
+  section{padding:100px 20px; min-height:100vh; display:flex; justify-content:center; align-items:center; flex-direction:column;}
+  .info-container{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; width:100%; max-width:1200px;}
+  .glass-box:hover{transform:translateY(-5px); box-shadow:0 10px 25px rgba(0,0,0,0.25); cursor:pointer;}
+  .glass-box h3{margin:0;color:var(--accent);}
+  .glass-box p{margin:5px 0;color:inherit;}
+
+  .circle-logo{width:50px;height:50px;border-radius:50%;object-fit:cover;margin:0 auto 10px;}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="logo-circle" onclick="goHome()">
+    <img src="https://via.placeholder.com/120" alt="Logo">
+  </div>
+  <div>
+    <span class="theme-toggle" onclick="toggleTheme()">🌗</span>
+    <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+  </div>
+</div>
+
+<!-- MENU -->
+<div class="menu" id="menu">
+  <ul>
+    <li onclick="goHome()">Home</li>
+    <li onclick="scrollToSection('experience')">Experience</li>
+    <li onclick="scrollToSection('payment')">Payment</li>
+    <li onclick="scrollToSection('contact')">Contact/Social</li>
+    <li onclick="scrollToSection('about')">About</li>
+  </ul>
+</div>
+
+<!-- HOME -->
+<section id="home">
+  <div class="glass-card">
+    <img src="https://via.placeholder.com/120" alt="Profile Pic">
+    <h1>MIDUL'S PRESENT</h1>
+    <h3>Abdullah Al Midul | Founder & CEO</h3>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="info-container">
+    <div class="glass-box">
+      <h3>Skills</h3>
+      <p>Video Editing, Graphics Designer, AI, Motion Graphics</p>
+    </div>
+    <div class="glass-box">
+      <h3>Education</h3>
+      <p>Class 10 → 11 | Extra: Computer, Design, Creativity</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT -->
+<section id="payment">
+  <div class="info-container">
+    <div class="glass-box" onclick="window.open('tel:+8801981274162')">
+      <img class="circle-logo" src="https://via.placeholder.com/50" alt="Bkash">
+      <h3>Bkash</h3>
+      <p>+8801981274162</p>
+    </div>
+    <div class="glass-box" onclick="window.open('tel:+8801981274162')">
+      <img class="circle-logo" src="https://via.placeholder.com/50" alt="Nagad">
+      <h3>Nagad</h3>
+      <p>+8801981274162</p>
+    </div>
+    <div class="glass-box" onclick="alert('Contact in WhatsApp')">
+      <img class="circle-logo" src="https://via.placeholder.com/50" alt="Bank">
+      <h3>Bank Account</h3>
+      <p>Contact in WhatsApp</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / SOCIAL -->
+<section id="contact">
+  <div class="info-container">
+    <div class="glass-box" onclick="window.open('tel:+8801981274162')"><h3>Call</h3><p>+8801981274162</p></div>
+    <div class="glass-box" onclick="window.open('mailto:abdullahalmidul@gmail.com')"><h3>Gmail</h3><p>abdullahalmidul@gmail.com</p></div>
+    <div class="glass-box" onclick="window.open('https://goo.gl/maps/example')"><h3>Location</h3><p>Shiddirganj, Narayanganj</p></div>
+    <div class="glass-box" onclick="window.open('https://wa.me/8801981274162')"><h3>Whatsapp</h3><p>+8801981274162</p></div>
+    <div class="glass-box" onclick="window.open('https://www.facebook.com/Abdullah.Al.Midul')"><h3>Facebook</h3><p>AB MIDUL</p></div>
+    <div class="glass-box" onclick="window.open('https://t.me/ab_midul')"><h3>Telegram</h3><p>@ab_midul</p></div>
+    <div class="glass-box" onclick="window.open('https://discord.com/users/ab_midul')"><h3>Discord</h3><p>@ab_midul</p></div>
+    <div class="glass-box" onclick="window.open('https://x.com/ab_midul')"><h3>Twitter (X)</h3><p>@ab_midul</p></div>
+    <div class="glass-box" onclick="window.open('https://www.tiktok.com/@ab_midul')"><h3>Tiktok</h3><p>@ab_midul</p></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="glass-card">
+    <img src="https://via.placeholder.com/120" alt="Profile Pic">
+    <h1>MIDUL'S PRESENT</h1>
+    <h3>Abdullah Al Midul | Founder & CEO</h3>
+    <p style="margin-top:10px;">
+      MIDUL'S PRESENT is a professional digital brand focusing on video editing, graphics design, AI, and creative tech solutions. 
+      Our mission is to empower individuals with innovative multimedia tools and premium content creation experiences. We prioritize quality, experience, and creativity to deliver maximum impact to our clients.
+    </p>
+  </div>
+</section>
+
+<script>
+  const menu = document.getElementById('menu');
+  function toggleMenu(){menu.classList.toggle('show');}
+  function toggleTheme(){document.body.classList.toggle('dark');menu.classList.toggle('dark');}
+  function goHome(){window.scrollTo({top:0,behavior:'smooth'}); menu.classList.remove('show');}
+  function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'}); menu.classList.remove('show');}
+</script>
+
+</body>
+</html>
