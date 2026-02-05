@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIDUL'S PRESENT</title>
+
+<style>
+:root{
+  --accent:#4FC3F7;
+  --light-bg:#f4f6f8;
+  --light-box:rgba(255,255,255,0.65);
+  --dark-bg:#000;
+  --dark-box:rgba(18,18,18,0.75);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,body{
+  overflow-x:hidden; /* ✅ menu overflow fix */
+}
+
+body{
+  font-family:Segoe UI, sans-serif;
+  background:var(--light-bg);
+  color:#111;
+  transition:0.4s;
+}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:60px;
+  padding:0 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,0.6);
+  z-index:999;
+}
+
+.logo-circle{
+  width:44px;height:44px;
+  border-radius:50%;
+  border:2px solid var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--accent);
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.menu-btn{
+  font-size:26px;
+  cursor:pointer;
+}
+
+/* ===== MENU ===== */
+.menu{
+  position:fixed;
+  top:0;
+  right:-260px;
+  width:260px;
+  height:100vh;
+  padding:80px 20px;
+  backdrop-filter:blur(15px);
+  background:rgba(255,255,255,0.75);
+  transition:0.4s;
+  z-index:998;
+}
+
+.menu.show{
+  right:0;
+}
+
+.menu div{
+  margin:18px 0;
+  font-size:18px;
+  color:var(--accent);
+  cursor:pointer;
+}
+
+/* ===== SECTIONS ===== */
+section{
+  min-height:100vh;
+  padding:90px 20px 40px;
+}
+
+.center{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ===== GLASS BOX (LIGHT) ===== */
+.glass{
+  background:var(--light-box);
+  backdrop-filter:blur(16px);
+  border-radius:20px;
+  padding:28px;
+  box-shadow:
+    0 18px 35px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+  transition:0.4s;
+}
+
+/* ===== GRID ===== */
+.grid{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  gap:22px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+}
+
+/* ===== HOME ===== */
+.home-logo{
+  width:140px;height:140px;
+  border-radius:50%;
+  border:4px solid var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  color:var(--accent);
+  margin-bottom:15px;
+}
+
+h1{color:var(--accent);margin:8px 0}
+h3{font-weight:400}
+
+/* ===== PAYMENT ICONS ===== */
+.pay-icons{
+  margin-top:20px;
+  display:flex;
+  gap:18px;
+  justify-content:center;
+}
+
+.pay-icons div{
+  width:58px;height:58px;
+  border-radius:50%;
+  border:2px solid var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+/* ===== DARK MODE ===== */
+body.dark{
+  background:var(--dark-bg);
+  color:#f1f1f1;
+}
+
+body.dark .topbar{
+  background:rgba(0,0,0,0.7);
+}
+
+body.dark .menu{
+  background:rgba(0,0,0,0.75);
+}
+
+/* 🔥 DARK MODE REAL 3D EFFECT */
+body.dark .glass{
+  background:var(--dark-box);
+  box-shadow:
+    0 0 25px rgba(255,255,255,0.35),
+    0 0 60px rgba(255,255,255,0.15),
+    inset 0 0 12px rgba(255,255,255,0.18);
+  border:1px solid rgba(255,255,255,0.18);
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP -->
+<div class="topbar">
+  <div class="logo-circle" onclick="goHome()">MP</div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</div>
+
+<!-- MENU -->
+<div class="menu" id="menu">
+  <div onclick="goHome()">Home</div>
+  <div onclick="scrollToSection('experience')">Experience</div>
+  <div onclick="scrollToSection('payment')">Payment</div>
+  <div onclick="scrollToSection('contact')">Contact</div>
+  <div onclick="scrollToSection('about')">About</div>
+  <div onclick="toggleTheme()">🌗 Theme</div>
+</div>
+
+<!-- HOME -->
+<section class="center" id="home">
+  <div class="glass center">
+    <div class="home-logo">LOGO</div>
+    <h1>MIDUL'S PRESENT</h1>
+    <h3>Abdullah Al Midul</h3>
+    <p>Founder & CEO</p>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="grid">
+    <div class="glass">
+      <h3>Experience</h3>
+      <p>Professional in Video Editing, Graphics Design, AI tools & creative digital solutions.</p>
+    </div>
+    <div class="glass">
+      <h3>Education</h3>
+      <p>Completed Class 10, currently Class 11. Learning advanced creative & AI tools.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT -->
+<section id="payment">
+  <div class="grid">
+    <div class="glass"><h3>bKash</h3><p>+8801981274162</p></div>
+    <div class="glass"><h3>Nagad</h3><p>+8801981274162</p></div>
+    <div class="glass"><h3>Bank</h3><p>Contact via WhatsApp</p></div>
+  </div>
+
+  <div class="pay-icons">
+    <div onclick="window.location.href='tel:+8801981274162'">B</div>
+    <div onclick="window.location.href='tel:+8801981274162'">N</div>
+    <div onclick="scrollToSection('contact')">🏦</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="grid">
+    <div class="glass">📞 +8801981274162</div>
+    <div class="glass">✉️ abdullahalmidul@gmail.com</div>
+    <div class="glass" onclick="window.open('https://maps.google.com/?q=Mizmizi,Shiddirganj,Narayanganj,Dhaka')">
+      📍 Mizmizi, Shiddirganj, Narayanganj, Dhaka
+    </div>
+    <div class="glass" onclick="window.open('https://wa.me/8801981274162')">WhatsApp</div>
+    <div class="glass" onclick="window.open('https://facebook.com/Abdullah.Al.Midul')">Facebook</div>
+    <div class="glass" onclick="window.open('https://t.me/ab_midul')">Telegram</div>
+    <div class="glass" onclick="window.open('https://x.com/ab_midul')">Twitter (X)</div>
+    <div class="glass">Discord: @ab_midul</div>
+    <div class="glass" onclick="window.open('https://www.tiktok.com/@ab_midul')">TikTok</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="center">
+  <div class="glass center">
+    <div class="home-logo">LOGO</div>
+    <h2>MIDUL'S PRESENT</h2>
+    <p><b>THINK TO THRIVE</b><br>
+    A premium creative-tech brand focused on design, AI & modern digital solutions.</p>
+  </div>
+</section>
+
+<script>
+const menu=document.getElementById("menu");
+function toggleMenu(){menu.classList.toggle("show")}
+function toggleTheme(){document.body.classList.toggle("dark")}
+function goHome(){
+  window.scrollTo({top:0,behavior:"smooth"});
+  menu.classList.remove("show");
+}
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+  menu.classList.remove("show");
+}
+</script>
+
+</body>
+</html>
