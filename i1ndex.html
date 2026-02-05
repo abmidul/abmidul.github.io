@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<title>MIDUL'S PRESENT</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== ROOT THEME ===== */
+:root{
+  --bg-light:#ffffff;
+  --bg-dark:#0b0f1a;
+  --box-light:#f3f6fb;
+  --box-dark:#151a2e;
+  --text-light:#0b0f1a;
+  --text-dark:#ffffff;
+  --accent:#2f80ff;
+}
+
+[data-theme="light"]{
+  background:var(--bg-light);
+  color:var(--text-light);
+}
+[data-theme="dark"]{
+  background:var(--bg-dark);
+  color:var(--text-dark);
+}
+
+/* ===== GLOBAL ===== */
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui;}
+html{scroll-behavior:smooth;}
+body{min-height:100vh;}
+
+/* ===== HEADER ===== */
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 15px;
+  backdrop-filter:blur(10px);
+  z-index:1000;
+}
+
+/* LOGO BUTTON */
+.logo-btn{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  overflow:hidden;
+  cursor:pointer;
+}
+.logo-btn img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* HAMBURGER */
+.menu{
+  font-size:28px;
+  cursor:pointer;
+}
+
+/* SIDE MENU */
+nav{
+  position:fixed;
+  right:-260px;
+  top:0;
+  width:250px;
+  height:100%;
+  background:var(--box-light);
+  padding:20px;
+  transition:.3s;
+}
+[data-theme="dark"] nav{background:var(--box-dark);}
+nav a{
+  display:block;
+  margin:15px 0;
+  text-decoration:none;
+  color:inherit;
+  font-weight:600;
+}
+
+/* ===== SECTIONS ===== */
+section{
+  padding:100px 20px 60px;
+}
+
+.center{
+  text-align:center;
+}
+
+/* HERO LOGO */
+.hero-logo{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  margin:0 auto 15px;
+  overflow:hidden;
+}
+.hero-logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.box{
+  background:var(--box-light);
+  padding:20px;
+  border-radius:16px;
+  margin:15px 0;
+}
+[data-theme="dark"] .box{background:var(--box-dark);}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:15px;
+}
+
+/* THEME BUTTON */
+.theme-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  padding:10px 14px;
+  border-radius:50%;
+  background:var(--accent);
+  color:#fff;
+  cursor:pointer;
+  font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <!-- LOGO HOME BUTTON -->
+  <div class="logo-btn" onclick="goHome()">
+    <img src="logo.png" alt="logo">
+  </div>
+
+  <div class="menu" onclick="toggleMenu()">☰</div>
+</header>
+
+<nav id="menu">
+  <a href="#home" onclick="closeMenu()">Home</a>
+  <a href="#experience" onclick="closeMenu()">Experience</a>
+  <a href="#payment" onclick="closeMenu()">Payment</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+</nav>
+
+<!-- HOME -->
+<section id="home" class="center">
+  <div class="hero-logo">
+    <img src="logo.png">
+  </div>
+  <h2>MIDUL'S PRESENT</h2>
+  <p>Abdullah Al Midul</p>
+  <small>Founder & CEO</small>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <h2>Experience</h2>
+  <div class="box">Video Editing</div>
+  <div class="box">Graphic Design</div>
+  <div class="box">AI Tools</div>
+  <div class="box">Web Basics</div>
+</section>
+
+<!-- PAYMENT -->
+<section id="payment">
+  <h2>Payment</h2>
+  <div class="grid">
+    <div class="box">Bkash<br>+8801981274162</div>
+    <div class="box">Nagad<br>+8801981274162</div>
+    <div class="box">Bank<br>Contact in WhatsApp</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="grid">
+    <div class="box">Phone</div>
+    <div class="box">Gmail</div>
+    <div class="box">Location</div>
+    <div class="box">WhatsApp</div>
+    <div class="box">Facebook</div>
+    <div class="box">Telegram</div>
+    <div class="box">Discord</div>
+    <div class="box">X</div>
+    <div class="box">Tiktok</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="box center">
+    <div class="hero-logo">
+      <img src="logo.png">
+    </div>
+    <h3>MIDUL'S PRESENT</h3>
+    <p>Abdullah Al Midul – Founder & CEO</p>
+    <p>THINK TO THRIVE</p>
+  </div>
+</section>
+
+<!-- THEME BUTTON -->
+<div class="theme-btn" onclick="toggleTheme()">🌓</div>
+
+<script>
+function toggleMenu(){
+  const m=document.getElementById("menu");
+  m.style.right = m.style.right==="0px" ? "-260px":"0px";
+}
+function closeMenu(){document.getElementById("menu").style.right="-260px";}
+function goHome(){document.getElementById("home").scrollIntoView();}
+function toggleTheme(){
+  const html=document.documentElement;
+  html.dataset.theme = html.dataset.theme==="light" ? "dark":"light";
+}
+</script>
+
+</body>
+  </html>
