@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIDUL'S PRESENT</title>
+
+<style>
+:root{
+  --accent:#4FC3F7;
+  --light-bg:#f4f6f8;
+  --light-box:rgba(255,255,255,.65);
+  --dark-bg:#000;
+  --dark-box:rgba(18,18,18,.75);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden}
+
+body{
+  font-family:Segoe UI,sans-serif;
+  background:var(--light-bg);
+  color:#111;
+  transition:background .6s,color .6s;
+}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:60px;
+  padding:0 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  backdrop-filter:blur(14px);
+  background:rgba(255,255,255,.6);
+  z-index:999;
+}
+
+.logo-circle{
+  width:44px;height:44px;
+  border-radius:50%;
+  border:2px solid var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  color:var(--accent);
+  cursor:pointer;
+}
+
+.top-actions{
+  display:flex;
+  gap:16px;
+  align-items:center;
+}
+.menu-btn,.theme-btn{
+  font-size:22px;
+  cursor:pointer;
+}
+
+/* ===== RIGHT MENU ===== */
+.menu{
+  position:fixed;
+  top:0;right:-270px;
+  width:270px;
+  height:100vh;
+  padding:90px 24px;
+  backdrop-filter:blur(18px);
+  background:rgba(255,255,255,.75);
+  transition:.45s cubic-bezier(.4,0,.2,1);
+  z-index:998;
+}
+.menu.show{right:0}
+.menu div{
+  margin:20px 0;
+  font-size:18px;
+  color:var(--accent);
+  cursor:pointer;
+}
+
+/* ===== SECTIONS ===== */
+section{
+  min-height:100vh;
+  padding:100px 22px 40px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.grid{
+  max-width:1200px;
+  width:100%;
+  display:grid;
+  gap:22px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+}
+
+/* ===== GLASS BOX ===== */
+.glass{
+  background:var(--light-box);
+  backdrop-filter:blur(18px);
+  border-radius:20px;
+  padding:28px;
+  box-shadow:0 16px 35px rgba(0,0,0,.25);
+  transition:
+    transform .5s cubic-bezier(.4,0,.2,1),
+    box-shadow .5s,
+    background .6s;
+}
+.glass:hover{
+  transform:translateY(-6px);
+}
+
+/* ===== TITLES ===== */
+.title{
+  font-size:28px;
+  color:var(--accent);
+  text-align:center;
+  margin-bottom:10px;
+}
+.text{
+  text-align:center;
+  font-size:15px;
+}
+
+/* ===== HOME ===== */
+.home-box{
+  text-align:center;
+}
+.home-logo{
+  width:140px;height:140px;
+  border-radius:50%;
+  border:4px solid var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 15px;
+  color:var(--accent);
+  font-size:28px;
+}
+
+/* ===== PAYMENT ICONS ===== */
+.icons{
+  display:flex;
+  gap:18px;
+  justify-content:center;
+  margin-top:18px;
+}
+.icon{
+  width:56px;height:56px;
+  border-radius:50%;
+  border:2px solid var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+/* ===== DARK MODE ===== */
+body.dark{
+  background:var(--dark-bg);
+  color:#fff;
+}
+body.dark .topbar{background:rgba(0,0,0,.7)}
+body.dark .menu{background:rgba(0,0,0,.8)}
+
+body.dark .strong{
+  background:var(--dark-box);
+  box-shadow:
+    0 0 35px rgba(255,255,255,.35),
+    0 0 70px rgba(255,255,255,.15);
+}
+
+body.dark .soft{
+  background:var(--dark-box);
+  box-shadow:0 0 16px rgba(255,255,255,.18);
+}
+
+body:not(.dark) .text{color:#111}
+
+/* ===== ANIMATION ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(25px) scale(.96);
+  animation:reveal .8s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes reveal{
+  to{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="logo-circle" onclick="goHome()">MP</div>
+  <div class="top-actions">
+    <div class="theme-btn" onclick="toggleTheme()">🌗</div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  </div>
+</div>
+
+<!-- MENU -->
+<div class="menu" id="menu">
+  <div onclick="goHome()">Home</div>
+  <div onclick="go('experience')">Experience</div>
+  <div onclick="go('payment')">Payment</div>
+  <div onclick="go('contact')">Contact</div>
+  <div onclick="go('about')">About</div>
+</div>
+
+<!-- HOME -->
+<section>
+  <div class="glass strong reveal home-box">
+    <div class="home-logo">LOGO</div>
+    <div class="title">MIDUL'S PRESENT</div>
+    <div class="text">Abdullah Al Midul<br>Founder & CEO</div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="grid">
+    <div class="glass soft reveal">
+      <div class="title">Skills</div>
+      <div class="text">Video Editing • Graphics Design • AI Tools • UI Design • Branding</div>
+    </div>
+    <div class="glass soft reveal">
+      <div class="title">Education</div>
+      <div class="text">Class 10 Completed • Currently Class 11 • Self-Learning Creative Tech</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT -->
+<section id="payment">
+  <div class="grid">
+    <div class="glass soft reveal">
+      <div class="title">Bkash</div>
+      <div class="text">+8801981274162</div>
+    </div>
+    <div class="glass soft reveal">
+      <div class="title">Nagad</div>
+      <div class="text">+8801981274162</div>
+    </div>
+    <div class="glass soft reveal">
+      <div class="title">Bank</div>
+      <div class="text">Contact via WhatsApp</div>
+    </div>
+  </div>
+  <div class="icons">
+    <div class="icon">B</div>
+    <div class="icon">N</div>
+    <div class="icon">🏦</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="grid">
+    <div class="glass soft reveal"><div class="title">Contact</div><div class="text">+8801981274162</div></div>
+    <div class="glass soft reveal"><div class="title">Gmail</div><div class="text">abdullahalmidul@gmail.com</div></div>
+    <div class="glass soft reveal"><div class="title">Location</div><div class="text">Mizmizi, Shiddirganj, Narayanganj, Dhaka</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="glass strong reveal home-box">
+    <div class="home-logo">LOGO</div>
+    <div class="title">MIDUL'S PRESENT</div>
+    <div class="text">
+      A premium creative-tech brand focused on design, AI & digital solutions.<br>
+      <b>THINK TO THRIVE</b>
+    </div>
+  </div>
+</section>
+
+<script>
+const menu=document.getElementById("menu");
+function toggleMenu(){menu.classList.toggle("show")}
+function toggleTheme(){document.body.classList.toggle("dark")}
+function goHome(){window.scrollTo({top:0,behavior:"smooth"});menu.classList.remove("show")}
+function go(id){document.getElementById(id).scrollIntoView({behavior:"smooth"});menu.classList.remove("show")}
+</script>
+
+</body>
+</html>
