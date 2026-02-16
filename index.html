@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIDUL'S PRESENT - THINK TO THRIVE</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg-primary: #0f111a;
+    --bg-secondary: #1a1a2e;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --accent: #00d4ff;
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    --glow: 0 0 25px rgba(0, 212, 255, 0.35);
+    --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+body{background:var(--bg-primary);color:var(--text-primary);line-height:1.7;scroll-behavior:smooth;transition:var(--transition);position:relative;overflow-x:hidden;}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:var(--gradient);opacity:0.05;z-index:-1;animation:gradientShift 25s ease-in-out infinite;}
+@keyframes gradientShift{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+.navbar{position:fixed;top:0;width:100%;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;z-index:1000;background:var(--glass-bg);backdrop-filter:blur(20px);border-radius:0 0 24px 24px;}
+.navbar .brand{font-size:1.8rem;font-weight:800;color:var(--accent);}
+.nav-links{display:flex;gap:36px;}
+.nav-links a{color:var(--text-primary);text-decoration:none;font-weight:500;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--accent);transition:var(--transition);}
+.nav-links a:hover::after{width:100%;}
+.theme-toggle{background:none;border:none;color:var(--text-primary);font-size:1.5rem;cursor:pointer;padding:8px;border-radius:50%;transition:var(--transition);}
+.theme-toggle:hover{background:var(--glass-bg);backdrop-filter:blur(10px);}
+section{min-height:100vh;display:flex;align-items:center;padding:140px 0 80px;opacity:0;transform:translateY(60px);transition:var(--transition);}
+section.reveal{opacity:1;transform:translateY(0);}
+.hero{text-align:center;padding-top:180px;}
+.hero .profile{width:180px;height:180px;border-radius:50%;background:var(--accent);margin:0 auto 40px;display:flex;align-items:center;justify-content:center;font-size:3.8rem;color:white;font-weight:700;box-shadow:var(--glow);}
+.hero h1{font-size:4rem;font-weight:800;margin-bottom:16px;letter-spacing:-0.03em;line-height:1.1;}
+.hero .tagline{font-size:1.5rem;color:var(--text-secondary);margin-bottom:32px;}
+.hero .intro{font-size:1.2rem;max-width:650px;margin:0 auto 48px;animation:fadeIn 2.5s ease-in-out;font-weight:400;}
+.btn{background:var(--accent);color:white;padding:18px 36px;border:none;border-radius:24px;font-weight:600;font-size:1rem;cursor:pointer;transition:var(--transition);text-decoration:none;display:inline-block;box-shadow:0 8px 24px rgba(0,212,255,0.25);}
+.btn:hover{box-shadow:var(--glow);transform:translateY(-3px);}
+.glass{background:var(--glass-bg);backdrop-filter:blur(25px);border:1px solid var(--glass-border);border-radius:24px;box-shadow:var(--shadow);transition:var(--transition);padding:40px;}
+.glass:hover{box-shadow:var(--glow);transform:translateY(-6px);}
+.about h2,.skills h2,.projects h2,.contact h2{font-size:2.6rem;font-weight:700;margin-bottom:48px;text-align:center;}
+.about p{font-size:1.15rem;margin-bottom:24px;text-align:center;}
+.about p strong{font-weight:600;color:var(--accent);}
+.skills .grid,.projects .grid,.contact .grid{display:grid;gap:36px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:48px;}
+.skill-card,.contact-card{background:var(--glass-bg);backdrop-filter:blur(25px);border:1px solid var(--glass-border);border-radius:24px;padding:32px 24px;text-align:center;font-size:1.1rem;font-weight:600;transition:var(--transition);}
+.skill-card:hover,.contact-card:hover{box-shadow:var(--glow);transform:translateY(-8px);}
+.project-card{background:var(--glass-bg);backdrop-filter:blur(25px);border:1px solid var(--glass-border);border-radius:24px;overflow:hidden;transition:var(--transition);}
+.project-card:hover{box-shadow:var(--glow);transform:translateY(-8px);}
+.project-card img{width:100%;height:220px;object-fit:cover;}
+.project-card .content{padding:32px;}
+.project-card h3{font-size:1.3rem;font-weight:700;margin-bottom:12px;}
+.project-card p{font-size:1rem;margin-bottom:24px;color:var(--text-secondary);}
+.footer{background:var(--bg-secondary);padding:56px 0;text-align:center;}
+.footer p{font-size:1rem;margin-bottom:8px;font-weight:500;}
+.footer p:last-child{color:var(--text-secondary);font-weight:400;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@media(max-width:768px){.hero h1{font-size:2.5rem;}.hero .profile{width:140px;height:140px;font-size:2.5rem;}.nav-links{display:none;}.container{padding:0 16px;}.glass{padding:32px;}.projects .grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="navbar">
+<div class="brand">MIDUL'S PRESENT</div>
+<div class="nav-links">
+<a href="#hero">Home</a>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+</div>
+<button class="theme-toggle" id="theme-toggle">🌙</button>
+</nav>
+<section id="hero" class="hero">
+<div class="profile">AM</div>
+<h1>MIDUL'S PRESENT</h1>
+<p class="tagline">THINK TO THRIVE</p>
+<p class="intro">Abdullah Al Midul, Creative Technologist & Digital Strategist, crafting innovative solutions at the intersection of AI, design, and digital branding.</p>
+<a href="#projects" class="btn">View Projects</a>
+</section>
+<section id="about" class="about">
+<div class="glass">
+<h2>About Me</h2>
+<p>Creative Technologist & Digital Strategist leveraging AI-driven tools to create compelling digital experiences spanning web design, UI/UX, branding, and strategy.</p>
+<p><strong>Vision:</strong> Empower brands with cutting-edge tech and design delivering premium, measurable results.</p>
+</div>
+</section>
+<section id="skills" class="skills">
+<h2>Skills</h2>
+<div class="grid">
+<div class="skill-card">Web Design</div>
+<div class="skill-card">UI/UX</div>
+<div class="skill-card">Branding</div>
+<div class="skill-card">AI Tools</div>
+<div class="skill-card">Video Editing</div>
+<div class="skill-card">Strategy</div>
+</div>
+</section>
+<section id="projects" class="projects">
+<h2>Projects</h2>
+<div class="grid">
+<div class="project-card">
+<img src="https://via.placeholder.com/320x220?text=Project+1" alt="Project 1">
+<div class="content">
+<h3>Project Title 1</h3>
+<p>Brief description highlighting key features and impact.</p>
+<a href="#" class="btn">View Details</a>
+</div>
+</div>
+<div class="project-card">
+<img src="https://via.placeholder.com/320x220?text=Project+2" alt="Project 2">
+<div class="content">
+<h3>Project Title 2</h3>
+<p>Brief description highlighting key features and impact.</p>
+<a href="#" class="btn">View Details</a>
+</div>
+</div>
+<div class="project-card">
+<img src="https://via.placeholder.com/320x220?text=Project+3" alt="Project 3">
+<div class="content">
+<h3>Project Title 3</h3>
+<p>Brief description highlighting key features and impact.</p>
+<a href="#" class="btn">View Details</a>
+</div>
+</div>
+</div>
+</section>
+<section id="contact" class="contact">
+<h2>Contact & Social</h2>
+<div class="grid">
+<div class="contact-card"><a href="https://wa.me/8801981274162">WhatsApp</a></div>
+<div class="contact-card"><a href="mailto:abdullahalmidul@gmail.com">Gmail</a></div>
+<div class="contact-card"><a href="https://facebook.com/Abdullah.Al.Midul">Facebook</a></div>
+<div class="contact-card"><a href="https://t.me/ab_midul">Telegram</a></div>
+<div class="contact-card"><p>Location: Dhaka, Bangladesh</p></div>
+</div>
+</section>
+<footer class="footer">
+<p>MIDUL'S PRESENT - THINK TO THRIVE</p>
+<p>&copy; 2026 Abdullah Al Midul. All rights reserved.</p>
+</footer>
+<script>
+const themeToggle=document.getElementById('theme-toggle');
+themeToggle.addEventListener('click',()=>{
+document.body.dataset.theme=document.body.dataset.theme==='dark'?'light':'dark';
+themeToggle.textContent=document.body.dataset.theme==='dark'?'☀️':'🌙';
+});
+const sections=document.querySelectorAll('section');
+const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('reveal');}});},{threshold:0.1});
+sections.forEach(section=>observer.observe(section));
+document.querySelectorAll('.nav-links a').forEach(anchor=>{anchor.addEventListener('click',function(e){e.preventDefault();document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'});});});
+</script>
+</body>
+</html>
