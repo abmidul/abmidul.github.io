@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIDUL'S PRESENT</title>
+
+<style>
+:root{
+  --accent:#4FC3F7;
+  --light-bg:#f4f6f8;
+  --light-box:rgba(255,255,255,.7);
+  --dark-bg:#000;
+  --dark-box:#121212;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden;scroll-behavior:smooth}
+
+body{
+  font-family:Segoe UI,sans-serif;
+  background:var(--dark-bg);
+  color:#fff;
+  transition:.4s;
+}
+
+/* REMOVE UNDERLINE */
+a{text-decoration:none;color:inherit}
+
+/* TOPBAR */
+.topbar{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:60px;
+  padding:0 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  backdrop-filter:blur(12px);
+  background:rgba(0,0,0,.6);
+  z-index:999;
+}
+
+.logo-circle{
+  width:44px;height:44px;
+  border-radius:50%;
+  border:2px solid var(--accent);
+  overflow:hidden;
+  cursor:pointer;
+}
+.logo-circle img{
+  width:100%;height:100%;object-fit:cover;
+}
+
+.top-actions{display:flex;gap:16px}
+.menu-btn,.theme-btn{cursor:pointer;font-size:22px}
+
+/* MENU FIX */
+.menu{
+  position:fixed;
+  top:0;right:-260px;
+  width:260px;height:100vh;
+  padding:90px 20px;
+  backdrop-filter:blur(18px);
+  background:rgba(0,0,0,.8);
+  transition:.4s;
+  z-index:1000;
+}
+.menu.show{right:0}
+.menu div{margin:20px 0;cursor:pointer;color:var(--accent)}
+
+/* SECTION FULL SCREEN CENTER */
+section{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:80px 20px;
+}
+
+/* GRID */
+.grid{
+  max-width:900px;
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:40px;
+}
+
+/* CARD */
+.glass{
+  background:var(--dark-box);
+  padding:22px;
+  border-radius:20px;
+  text-align:center;
+  transition:.3s;
+  position:relative;
+}
+.glass:hover{transform:translateY(-6px)}
+
+/* STRONGER GLOW */
+body.dark .glass{
+  box-shadow:0 0 30px rgba(79,195,247,.6);
+}
+
+/* TITLE */
+.title{
+  font-weight:bold;
+  font-size:24px;
+  color:var(--accent);
+  margin-bottom:10px;
+  text-align:center;
+}
+.text{
+  font-size:14px;
+  line-height:1.7;
+}
+
+/* HOME */
+.home-box{
+  max-width:500px;
+  width:100%;
+  padding:35px;
+  box-shadow:0 0 50px rgba(255,255,255,.25);
+}
+.home-logo{
+  width:140px;height:140px;
+  border-radius:50%;
+  border:4px solid var(--accent);
+  overflow:hidden;
+  margin:0 auto 18px;
+}
+.home-logo img{
+  width:100%;height:100%;object-fit:cover;
+}
+
+/* BIGGER NAME */
+.home-box .title{
+  font-size:30px;
+  letter-spacing:1px;
+}
+
+/* NEON */
+#social .glass,
+#payment .glass{
+  border:2px solid transparent;
+  background-clip:padding-box;
+}
+#social .glass::after,
+#payment .glass::after{
+  content:"";
+  position:absolute;
+  inset:-3px;
+  border-radius:22px;
+  background:linear-gradient(
+    90deg,
+    #4FC3F7,
+    #ffffff,
+    #ff4fd8,
+    #4FC3F7
+  );
+  background-size:300% 100%;
+  animation:neon 4s linear infinite;
+  z-index:-1;
+}
+@keyframes neon{
+  0%{background-position:0%}
+  100%{background-position:300%}
+}
+
+/* LIGHT MODE */
+body.light{
+  background:var(--light-bg);
+  color:#111;
+}
+body.light .glass{
+  background:var(--light-box);
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+body.light .topbar{background:rgba(255,255,255,.7)}
+body.light .menu{background:rgba(255,255,255,.8)}
+body.light #about .title,
+body.light #about .text span{
+  color:#000;
+}
+
+/* DARK ABOUT FIX */
+body:not(.light) #about .title{
+  color:#fff;
+}
+</style>
+</head>
+
+<body class="dark">
+
+<div class="topbar">
+  <div class="logo-circle" onclick="goHome()">
+    <img src="logo.png">
+  </div>
+  <div class="top-actions">
+    <div class="theme-btn" onclick="toggleTheme()">🌗</div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  </div>
+</div>
+
+<div class="menu" id="menu">
+  <div onclick="goHome()">Home</div>
+  <div onclick="go('experience')">Experience</div>
+  <div onclick="go('social')">Social</div>
+  <div onclick="go('payment')">Payment</div>
+  <div onclick="go('about')">About</div>
+</div>
+
+<!-- HOME -->
+<section id="home">
+  <div class="glass home-box">
+    <div class="home-logo">
+      <img src="logo.png">
+    </div>
+    <div class="title">MIDUL'S PRESENT</div>
+    <div class="text">
+      Abdullah Al Midul<br>
+      Founder & Creative Technologist
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="grid">
+    <div class="glass">
+      <div class="title">SKILLS</div>
+      <div class="text">
+        Web Design • UI/UX • Graphic Design<br>
+        Video Editing • AI Tools • Branding<br>
+        Digital Strategy • Marketing • Automation
+      </div>
+    </div>
+    <div class="glass">
+      <div class="title">EDUCATION</div>
+      <div class="text">
+        SSC Completed (Science)<br>
+        Currently HSC Running<br>
+        Self-Learning in AI & Tech<br>
+        Specialized in Creative Branding
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section id="social">
+  <div class="grid">
+    <a href="tel:+8801981274162" class="glass"><div class="title">CONTACT</div><div class="text">+8801981274162</div></a>
+    <a href="mailto:abdullahalmidul@gmail.com" class="glass"><div class="title">GMAIL</div><div class="text">abdullahalmidul@gmail.com</div></a>
+    <a href="#" class="glass"><div class="title">LOCATION</div><div class="text">Bangladesh</div></a>
+    <a href="https://wa.me/8801981274162" class="glass"><div class="title">WHATSAPP</div><div class="text">+8801981274162</div></a>
+    <a href="https://www.facebook.com/Abdullah.Al.Midul" class="glass"><div class="title">FACEBOOK</div><div class="text">AB MIDUL</div></a>
+    <a href="#" class="glass"><div class="title">TELEGRAM</div><div class="text">@abmidul</div></a>
+    <a href="#" class="glass"><div class="title">DISCORD</div><div class="text">midul#0001</div></a>
+    <a href="#" class="glass"><div class="title">X</div><div class="text">@abmidul</div></a>
+    <a href="#" class="glass"><div class="title">TIKTOK</div><div class="text">@abmidul</div></a>
+  </div>
+</section>
+
+<!-- PAYMENT -->
+<section id="payment">
+  <div class="grid">
+    <a href="#" class="glass"><div class="title">BKASH</div><div class="text">+8801981274162</div></a>
+    <a href="#" class="glass"><div class="title">NAGAD</div><div class="text">+8801981274162</div></a>
+    <a href="#" class="glass"><div class="title">BANK ACCOUNT</div><div class="text">Available on Request</div></a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="glass home-box">
+    <div class="home-logo">
+      <img src="logo.png">
+    </div>
+    <div class="title">ABOUT COMPANY</div>
+    <div class="text">
+      Premium creative-tech identity focused on AI, design and digital solutions.<br><br>
+      Vision: Empower brands with cutting-edge technology delivering measurable growth.
+    </div>
+  </div>
+</section>
+
+<script>
+const menu=document.getElementById("menu");
+function toggleMenu(){menu.classList.toggle("show")}
+function toggleTheme(){
+  document.body.classList.toggle("light");
+}
+function goHome(){
+  window.scrollTo({top:0,behavior:"smooth"});
+  menu.classList.remove("show");
+}
+function go(id){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+  menu.classList.remove("show");
+}
+</script>
+
+</body>
+</html>
