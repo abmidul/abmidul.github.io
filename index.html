@@ -1,0 +1,332 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>MIDUL'S PRESENT</title>  
+  
+<style>  
+:root{  
+  --accent:#4FC3F7;  
+  --light-bg:#f4f6f8;  
+  --light-box:rgba(255,255,255,.7);  
+  --dark-bg:#000;  
+  --dark-box:#121212;  
+}  
+  
+*{box-sizing:border-box;margin:0;padding:0}  
+html,body{overflow-x:hidden}  
+  
+body{  
+  font-family:Segoe UI,sans-serif;  
+  background:var(--light-bg);  
+  color:#111;  
+  transition:.4s;  
+}  
+  
+a{text-decoration:none;color:inherit}  
+  
+/* TOPBAR */  
+.topbar{  
+  position:fixed;  
+  top:0;left:0;right:0;  
+  height:60px;  
+  padding:0 18px;  
+  display:flex;  
+  justify-content:space-between;  
+  align-items:center;  
+  backdrop-filter:blur(12px);  
+  background:rgba(255,255,255,.6);  
+  z-index:1001;  
+}  
+  
+.logo-circle{  
+  width:44px;height:44px;  
+  border-radius:50%;  
+  border:2px solid var(--accent);  
+  overflow:hidden;  
+  cursor:pointer;  
+}  
+.logo-circle img{  
+  width:100%;height:100%;object-fit:cover;  
+}  
+  
+.top-actions{display:flex;gap:16px}  
+.menu-btn,.theme-btn{cursor:pointer;font-size:22px}  
+  
+/* OVERLAY */  
+#overlay{  
+  position:fixed;  
+  inset:0;  
+  background:rgba(0,0,0,0.3);  
+  backdrop-filter:blur(5px);  
+  display:none;  
+  z-index:998;  
+}  
+  
+/* MENU */  
+.menu{  
+  position:fixed;  
+  top:0;right:-260px;  
+  width:260px;height:100vh;  
+  padding:90px 20px;  
+  backdrop-filter:blur(18px);  
+  background:rgba(255,255,255,0.3);  
+  box-shadow:0 0 40px rgba(0,0,0,0.15);  
+  transition:.4s;  
+  z-index:1000;  
+}  
+.menu.show{right:0}  
+.menu div{margin:20px 0;cursor:pointer;color:var(--accent)}  
+  
+/* SECTION */  
+section{  
+  padding:100px 20px 60px;  
+}  
+  
+/* GRID */  
+.grid{  
+  max-width:900px;  
+  margin:auto;  
+  display:grid;  
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));  
+  gap:40px;  
+}  
+  
+/* CARD */  
+.glass{  
+  background:var(--light-box);  
+  padding:18px;  
+  border-radius:20px;  
+  text-align:center;  
+  box-shadow:0 8px 20px rgba(0,0,0,.15);  
+  transition:.3s;  
+  position:relative;  
+}  
+.glass:hover{transform:translateY(-5px)}  
+  
+.title{  
+  font-weight:bold;  
+  font-size:18px;  
+  color:var(--accent);  
+  margin-bottom:6px;  
+}  
+.text{  
+  font-size:14px;  
+  line-height:1.6;  
+}  
+  
+/* HOME */  
+.home-box{  
+  max-width:500px;  
+  margin:auto;  
+  text-align:center;  
+  padding:30px;  
+}  
+.home-logo{  
+  width:130px;height:130px;  
+  border-radius:50%;  
+  border:4px solid var(--accent);  
+  overflow:hidden;  
+  margin:0 auto 15px;  
+}  
+.home-logo img{  
+  width:100%;height:100%;object-fit:cover;  
+}  
+  
+/* DARK MODE */  
+body.dark{  
+  background:var(--dark-bg);  
+  color:#fff;  
+}  
+body.dark .topbar{background:rgba(0,0,0,.6)}  
+body.dark .menu{background:rgba(0,0,0,0.3)}  
+  
+/* HOME GLOW */  
+body.dark .home-box{  
+  background:var(--dark-box);  
+  box-shadow:0 0 40px rgba(255,255,255,.25);  
+}  
+  
+/* EXPERIENCE BLUE GLOW */  
+body.dark #experience .glass{  
+  background:var(--dark-box);  
+  box-shadow:0 0 25px rgba(79,195,247,.6);  
+}  
+  
+/* SOCIAL + PAYMENT NEON GLOW */  
+body.dark #social .glass,  
+body.dark #payment .glass{  
+  background:var(--dark-box);  
+  border:2px solid transparent;  
+  background-clip:padding-box;  
+}  
+  
+body.dark #social .glass::after,  
+body.dark #payment .glass::after{  
+  content:"";  
+  position:absolute;  
+  inset:-3px;  
+  border-radius:22px;  
+  background:linear-gradient(  
+    90deg,  
+    #4FC3F7,  
+    #ffffff,  
+    #ff4fd8,  
+    #4FC3F7  
+  );  
+  background-size:300% 100%;  
+  animation:neon 4s linear infinite;  
+  z-index:-1;  
+}  
+  
+@keyframes neon{  
+  0%{background-position:0%}  
+  100%{background-position:300%}  
+}  
+  
+/* ABOUT HEADING COLOR FIX */  
+.about-heading{  
+  font-weight:bold;  
+  color:#000;  
+}  
+  
+body.dark .about-heading{  
+  color:#fff;  
+}  
+  
+</style>  
+</head>  
+  
+<body>  
+  
+<div class="topbar">  
+  <div class="logo-circle" onclick="goHome()">  
+    <img src="logo.png">  
+  </div>  
+  <div class="top-actions">  
+    <div class="theme-btn" onclick="toggleTheme()">🌗</div>  
+    <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">☰</div>  
+  </div>  
+</div>  
+  
+<div id="overlay" onclick="closeMenu()"></div>  
+  
+<div class="menu" id="menu">  
+  <div onclick="goHome()">Home</div>  
+  <div onclick="go('experience')">Experience</div>  
+  <div onclick="go('social')">Social</div>  
+  <div onclick="go('payment')">Payment</div>  
+  <div onclick="go('about')">About</div>  
+</div>  
+  
+<!-- HOME -->  
+<section>  
+  <div class="glass home-box">  
+    <div class="home-logo">  
+      <img src="logo.png">  
+    </div>  
+    <div class="title">MIDUL'S PRESENT</div>  
+    <div class="text">  
+      Abdullah Al Midul<br>  
+      Founder & Technologist  
+    </div>  
+  </div>  
+</section>  
+  
+<!-- EXPERIENCE -->  
+<section id="experience">  
+  <div class="grid">  
+    <div class="glass">  
+      <div class="title">SKILLS</div>  
+      <div class="text">  
+        Web Design • UI/UX • Graphic Design • Video Editing • AI Tools • Branding • Digital Strategy  
+      </div>  
+    </div>  
+    <div class="glass">  
+      <div class="title">EDUCATION</div>  
+      <div class="text">  
+        SSC Completed • Currently HSC  
+      </div>  
+    </div>  
+  </div>  
+</section>  
+  
+<!-- SOCIAL -->  
+<section id="social">  
+  <div class="grid">  
+    <a href="tel:+8801981274162" class="glass"><div class="title">CONTACT</div><div class="text">+8801981274162</div></a>  
+    <a href="#" class="glass"><div class="title">LOCATION</div><div class="text">Mizmizi Paschim Para,Shiddirganj,Narayanganj,Dhaka,Bangladesh</div></a>  
+    <a href="mailto:abdullahalmidul@gmail.com" class="glass"><div class="title">GMAIL</div><div class="text">abdullahalmidul@gmail.com</div></a>  
+    <a href="https://wa.me/8801981274162" class="glass"><div class="title">WHATSAPP</div><div class="text">+8801981274162</div></a>  
+    <a href="https://www.facebook.com/Abdullah.Al.Midul" class="glass"><div class="title">FACEBOOK</div><div class="text">AB MIDUL</div></a>  
+    <a href="https://t.me/AbdullahAlMidul" class="glass"><div class="title">TELEGRAM</div><div class="text">@ab_midul</div></a>  
+    <a href="https://twitter.com/AbdullahAlMidul" class="glass"><div class="title">X</div><div class="text">@ab_midul</div></a>  
+    <a href="https://discord.gg/yourdiscord" class="glass"><div class="title">DISCORD</div><div class="text">@ab_midul</div></a>  
+    <a href="https://www.tiktok.com/@abdullahalmidul" class="glass"><div class="title">TIKTOK</div><div class="text">@ab_midul</div></a>  
+  </div>  
+</section>  
+  
+<!-- PAYMENT -->  
+<section id="payment">  
+  <div class="grid">  
+    <a href="tel:+8801981274162" class="glass"><div class="title">BKASH</div><div class="text">+8801981274162</div></a>  
+    <a href="tel:+8801981274162" class="glass"><div class="title">NAGAD</div><div class="text">+8801981274162</div></a>  
+    <a href="https://wa.me/8801981274162" class="glass"><div class="title">BANK ACCOUNT</div><div class="text">Contact in Whatsapp</div></a>  
+  </div>  
+</section>  
+  
+<!-- ABOUT -->  
+<section id="about">  
+  <div class="glass home-box">  
+    <div class="home-logo">  
+      <img src="logo.png">  
+    </div>  
+    <div class="title">MIDUL'S PRESENT</div>  
+    <div class="text">  
+      <span class="about-heading">About Company:</span>  
+      Premium creative-tech identity focused on AI, design and digital solutions.<br><br>  
+      <span class="about-heading">Vision & Plan:</span>  
+      Empower brands with cutting-edge technology delivering measurable growth.  
+    </div>  
+  </div>  
+</section>  
+  
+<script>  
+const menu=document.getElementById("menu");  
+const overlay=document.getElementById("overlay");  
+const menuBtn=document.getElementById("menuBtn");  
+  
+function toggleMenu(){  
+  if(menu.classList.contains("show")){  
+    closeMenu();  
+  }else{  
+    menu.classList.add("show");  
+    overlay.style.display="block";  
+    menuBtn.innerHTML="✖";  
+  }  
+}  
+  
+function closeMenu(){  
+  menu.classList.remove("show");  
+  overlay.style.display="none";  
+  menuBtn.innerHTML="☰";  
+}  
+  
+function toggleTheme(){  
+  document.body.classList.toggle("dark");  
+}  
+  
+function goHome(){  
+  window.scrollTo({top:0,behavior:"smooth"});  
+  closeMenu();  
+}  
+  
+function go(id){  
+  document.getElementById(id).scrollIntoView({behavior:"smooth", block:"start"});  
+  closeMenu();  
+}  
+</script>  
+  
+</body>  
+</html>
