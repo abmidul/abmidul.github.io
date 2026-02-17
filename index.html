@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Glass UI</title>
+
+<style>
+:root{
+  --bg:linear-gradient(135deg,#4fc3f7,#7b1fa2);
+  --text:#000;
+  --box-bg:rgba(255,255,255,.25);
+  --dark-bg:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  --dark-text:#fff;
+  --dark-box:rgba(0,0,0,.4);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  transition:.4s;
+}
+
+body.dark{
+  background:var(--dark-bg);
+  color:var(--dark-text);
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 20px;
+  backdrop-filter:blur(10px);
+  background:rgba(255,255,255,.2);
+  position:fixed;
+  width:100%;
+  top:0;
+  z-index:1000;
+}
+
+body.dark .topbar{
+  background:rgba(0,0,0,.4);
+}
+
+.logo{
+  font-weight:bold;
+  font-size:18px;
+}
+
+.top-actions{
+  display:flex;
+  gap:15px;
+}
+
+.theme-btn,
+.menu-btn{
+  cursor:pointer;
+  font-size:20px;
+}
+
+.menu{
+  position:fixed;
+  top:0;
+  right:-250px;
+  width:250px;
+  height:100%;
+  background:rgba(255,255,255,.3);
+  backdrop-filter:blur(15px);
+  padding:60px 20px;
+  transition:.4s;
+  z-index:1001;
+}
+
+body.dark .menu{
+  background:rgba(0,0,0,.6);
+}
+
+.menu.show{
+  right:0;
+}
+
+.menu div{
+  margin:15px 0;
+  cursor:pointer;
+}
+
+.section{
+  padding:120px 20px;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.home-box{
+  max-width:500px;
+  margin:auto;
+  text-align:center;
+  padding:30px;
+  background:var(--box-bg);
+  backdrop-filter:blur(15px);
+  border-radius:20px;
+  box-shadow:0 0 25px rgba(79,195,247,.35);
+}
+
+body.dark .home-box{
+  background:var(--dark-box);
+  box-shadow:
+    0 0 25px rgba(79,195,247,.6),
+    0 0 50px rgba(255,255,255,.3),
+    0 0 80px rgba(255,0,200,.2);
+}
+
+.about-heading{
+  font-weight:bold;
+  color:#000;
+}
+
+body.dark .about-heading{
+  color:#fff;
+}
+
+#overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.3);
+  backdrop-filter:blur(5px);
+  display:none;
+  z-index:999;
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <div class="logo">My Company</div>
+  <div class="top-actions">
+    <div class="theme-btn" onclick="toggleTheme()">🌗</div>
+    <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">☰</div>
+  </div>
+</div>
+
+<div class="menu" id="menu">
+  <div onclick="goHome()">Home</div>
+  <div onclick="go('about')">About</div>
+  <div onclick="go('contact')">Contact</div>
+</div>
+
+<div id="overlay" onclick="closeMenu()"></div>
+
+<!-- HOME -->
+<div class="section" id="home">
+  <div class="home-box">
+    <h1>Welcome</h1>
+    <p>This is premium glass UI design.</p>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="section" id="about">
+  <div class="home-box">
+    <p><span class="about-heading">About Company:</span><br>
+    We create modern glass UI design websites.</p>
+    <br>
+    <p><span class="about-heading">Vision & Plan:</span><br>
+    Build high quality premium UI experiences.</p>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section" id="contact">
+  <div class="home-box">
+    <h2>Contact Us</h2>
+    <p>Email: example@email.com</p>
+  </div>
+</div>
+
+<script>
+const menu = document.getElementById("menu");
+const menuBtn = document.getElementById("menuBtn");
+const overlay = document.getElementById("overlay");
+
+function toggleMenu(){
+  if(menu.classList.contains("show")){
+    closeMenu();
+  }else{
+    openMenu();
+  }
+}
+
+function openMenu(){
+  menu.classList.add("show");
+  overlay.style.display="block";
+  menuBtn.innerHTML="✖";
+}
+
+function closeMenu(){
+  menu.classList.remove("show");
+  overlay.style.display="none";
+  menuBtn.innerHTML="☰";
+}
+
+function toggleTheme(){
+  document.body.classList.toggle("dark");
+}
+
+function goHome(){
+  window.scrollTo({top:0,behavior:"smooth"});
+  closeMenu();
+}
+
+function go(id){
+  document.getElementById(id).scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+  closeMenu();
+}
+</script>
+
+</body>
+</html>
