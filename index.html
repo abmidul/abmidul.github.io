@@ -66,18 +66,35 @@ a{text-decoration:none;color:inherit}
 
 /* MENU */
 .menu{
+.menu{
   position:fixed;
-  top:0;right:-260px;
-  width:260px;height:100vh;
+  top:0;
+  right:-260px;
+  width:260px;
+  height:100vh;
   padding:90px 20px;
-  backdrop-filter:blur(18px);
-  background:rgba(255,255,255,0.3);
-  box-shadow:0 0 40px rgba(0,0,0,0.15);
+  backdrop-filter:blur(20px);
+  background:rgba(255,255,255,0.25); /* Light mode transparent */
+  box-shadow:-10px 0 30px rgba(0,0,0,0.25); /* 3D shadow */
   transition:.4s;
   z-index:1000;
 }
+
+body.dark .menu{
+  background:rgba(0,0,0,0.3); /* Dark mode transparent */
+  box-shadow:-10px 0 40px rgba(79,195,247,.25); /* soft blue shadow */
+}
 .menu.show{right:0}
-.menu div{margin:20px 0;cursor:pointer;color:var(--accent)}
+.menu div{
+  margin:20px 0;
+  cursor:pointer;
+  transition:.3s;
+  color:#000; /* Light mode text = black */
+}
+
+body.dark .menu div{
+  color:#4FC3F7; /* Dark mode text = blue */
+}
 
 /* SECTION */
 section{
@@ -145,7 +162,10 @@ body.dark .menu{background:rgba(0,0,0,0.3)}
 /* HOME GLOW */
 body.dark .home-box{
   background:var(--dark-box);
-  box-shadow:0 0 40px rgba(255,255,255,.25);
+  box-shadow:
+    0 0 25px rgba(255,255,255,.5),
+    0 0 50px rgba(255,255,255,.35),
+    0 0 100px rgba(255,255,255,.25);
 }
 
 /* EXPERIENCE BLUE GLOW */
@@ -195,6 +215,21 @@ body.dark .about-heading{
   color:#fff;
 }
 
+/* FOOTER */
+.footer{
+  text-align:center;
+  padding:18px 10px;
+  font-size:14px;
+  background:#e0e0e0;
+  color:#333;
+  margin-top:40px;
+}
+
+body.dark .footer{
+  background:#2a2a2a;
+  color:#ccc;
+}
+
   /* FOOTER */
 .footer{
   text-align:center;
@@ -224,7 +259,7 @@ body.dark .footer{
   </div>
 </div>
 
-<div id="overlay" onclick="closeMenu()"></div>
+
 
 <div class="menu" id="menu">
   <div onclick="goHome()">Home</div>
@@ -320,14 +355,14 @@ function toggleMenu(){
     closeMenu();
   }else{
     menu.classList.add("show");
-    overlay.style.display="block";
+    
     menuBtn.innerHTML="✖";
   }
 }
 
 function closeMenu(){
   menu.classList.remove("show");
-  overlay.style.display="none";
+  
   menuBtn.innerHTML="☰";
 }
 
