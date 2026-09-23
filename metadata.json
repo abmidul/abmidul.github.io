@@ -1,0 +1,6 @@
+{
+  "name": "3D Spline Scene",
+  "description": "Interactive 3D Spline scene integrated with shadcn Card and spotlight effect.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
