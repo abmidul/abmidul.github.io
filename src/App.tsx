@@ -9,6 +9,7 @@ import { TechnicalSkillsSection } from '@/components/TechnicalSkillsSection';
 import { SoftwareToolsSection } from '@/components/SoftwareToolsSection';
 import { MyCreationsSection } from '@/components/MyCreationsSection';
 import { AreasOfExpertiseSection } from '@/components/AreasOfExpertiseSection';
+import { CtaSection } from '@/components/CtaSection';
 import { StackedCircularFooter } from '@/components/ui/stacked-circular-footer';
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
       <SoftwareToolsSection />
       <MyCreationsSection />
       <AreasOfExpertiseSection />
+      <CtaSection />
       <div className="w-full border-t border-zinc-800/80">
         <StackedCircularFooter />
       </div>
